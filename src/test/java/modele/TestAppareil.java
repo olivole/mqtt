@@ -1,0 +1,47 @@
+package modele;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+
+@TestMethodOrder(OrderAnnotation.class)
+public class TestAppareil {
+    private static final String NOM_BATTERIE1 = "batterie1";
+    private static Appareil batterie1 = new AppareilImpl(NOM_BATTERIE1);
+    private static final String NOM_CAPTEUR_1 = "capteur tension";
+    private static final String NOM_CAPTEUR_2 = "capteur intensite";
+    private static Capteur capteur1 = new Capteur(TypeCapteur.TENSION, NOM_CAPTEUR_1);
+    private static Capteur capteur2 = new Capteur(TypeCapteur.INTENSITE, NOM_CAPTEUR_2);
+    @Test @Order(1)
+    public void testAjoutCapteur1() {
+        assertTrue(batterie1.ajouterCapteur(capteur1));
+        assertTrue(batterie1.estEquipeDuCapteur(capteur1));
+    }
+    @Test @Order(2)
+    public void testAjoutANouveauCapteur1() {
+        assertFalse(batterie1.ajouterCapteur(capteur1));
+    }
+    @Test @Order(3)
+    public void testAjoutCapteur2() {
+        assertTrue(batterie1.ajouterCapteur(capteur2));
+        assertTrue(batterie1.estEquipeDuCapteur(capteur2));
+        assertEquals(2,batterie1.getNombreDeCapteurs());
+    }
+    @Test @Order(4)
+    public void testSuppressionCapteurExistant() {
+        assertTrue(batterie1.supprimerCapteur(capteur2));
+        assertFalse(batterie1.estEquipeDuCapteur(capteur2));
+        assertEquals(1,batterie1.getNombreDeCapteurs());
+    }
+    @Test @Order(5)
+    public void testSuppressionCapteurInexistant() {
+        assertFalse(batterie1.supprimerCapteur(capteur2));
+        assertFalse(batterie1.estEquipeDuCapteur(capteur2));
+        assertEquals(1,batterie1.getNombreDeCapteurs());
+    }
+
+}
