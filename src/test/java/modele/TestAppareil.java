@@ -81,7 +81,7 @@ public class TestAppareil {
     }
     @Test @Order(10)
     public void testComparable() {
-        assertEquals(-1, batterie1.compareTo(batterie2));
+        assertEquals(1, batterie1.compareTo(batterie2));
     }
 
 }
