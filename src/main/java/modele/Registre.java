@@ -17,7 +17,7 @@ public interface Registre {
     Set<String> getMessagesDesCapteursDUnAppareil(String nomAppareil) throws Exception;
 
     // permet de mémoriser un message obtenu lors d'un relevé d'un capteur
-    // le message est mémorisé dans le capteur dont on précise en paramètre le nom, ainsi que le nom de l'appareil qui devrait en être équipé
+    // le message est mémorisé dans le capteur dont on précise le nom en paramètre , ainsi que le nom de l'appareil qui devrait en être équipé
     // lance une exception si cet appareil n'est pas présent de le registre
     // lance une exception si l'appareil n'est pas équipé de ce capteur
     // si un message existe déjà pour le capteur de cet appareil, il est remplacé par le nouveau

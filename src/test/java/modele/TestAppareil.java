@@ -69,8 +69,17 @@ public class TestAppareil {
         assertNotNull(messages);
         assertEquals(2, messages.size());
     }
-
-    @Test @Order(9)
+    @Test
+    @Order(9)
+    public void testMemoriserMessageCapteurInexistant() {
+        try {
+            batterie1.getCapteur( "capteur inexistant");
+            fail("Il aurait du lancer une exception car le capteur est inexistant");
+        } catch (Exception ex) {
+            // ok
+        }
+    }
+    @Test @Order(10)
     public void testComparable() {
         assertEquals(-1, batterie1.compareTo(batterie2));
     }
