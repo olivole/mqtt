@@ -17,6 +17,8 @@ public class TestRegistre {
 
     private static final String NOM_CAPTEUR1 = "capteur tension";
     private static final String NOM_CAPTEUR2 = "capteur intensite";
+    private static final String MESSAGE1 = "tension 55.2 v";
+    private static final String MESSAGE2 = "intensite 4 A";
     private static Capteur capteur1 = new Capteur(TypeCapteur.TENSION, NOM_CAPTEUR1);
     private static Capteur capteur2 = new Capteur(TypeCapteur.INTENSITE, NOM_CAPTEUR2);
     private static final String NOM_BATTERIE1 = "batterie B";
@@ -56,13 +58,11 @@ public class TestRegistre {
 
     @Test
     @Order(4)
-    public void testPublierMessage1() {
-        String MESSAGE1 = "tension 55.2 v";
+    public void testMemoriserMessage1() {
         try {
             batterie1.ajouterCapteur(capteur1);
             registre.memoriserMessage(NOM_BATTERIE1, NOM_CAPTEUR1, MESSAGE1);
             Set<String> messages = registre.getMessagesDesCapteursDUnAppareil(NOM_BATTERIE1);
-            ;
             assertNotNull(messages);
             assertEquals(1, messages.size());
         } catch (Exception ex) {
@@ -72,8 +72,7 @@ public class TestRegistre {
 
     @Test
     @Order(5)
-    public void testPublierMessage2() {
-        String MESSAGE2 = "tension 53.2 v";
+    public void testMemoriserMessage2() {
         try {
             batterie1.ajouterCapteur(capteur2);
             registre.memoriserMessage(NOM_BATTERIE1, NOM_CAPTEUR2, MESSAGE2);
@@ -87,13 +86,34 @@ public class TestRegistre {
 
     @Test
     @Order(6)
-    public void testGetListeTrieeAppareils() {
-        Comparator<Appareil> comparateur = (ap1, ap2) -> ap1.getNom().compareTo(ap2.getNom());
-        List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateur);
-        assertNotNull(appareilsTries);
-        assertEquals(2, appareilsTries.size());
-        assertEquals(batterie2, appareilsTries.get(0));
-        assertEquals(batterie1, appareilsTries.get(1));
+    public void testMemoriserMessageAppareilInexistant() {
+        try {
+            registre.memoriserMessage("appareil inexistant", NOM_CAPTEUR2, MESSAGE2);
+            fail("Il aurait du lancer une exception car l'appareil est inexistant");
+        } catch (Exception ex) {
+            // ok
+        }
     }
 
-}
+    @Test
+    @Order(7)
+    public void testMemoriserMessageCapteurInexistant() {
+        try {
+            registre.memoriserMessage(NOM_BATTERIE1, "capteur inexistant", MESSAGE2);
+            fail("Il aurait du lancer une exception car le capteur est inexistant");
+        } catch (Exception ex) {
+            // ok
+        }
+    }
+        @Test
+        @Order(8)
+        public void testGetListeTrieeAppareils () {
+            Comparator<Appareil> comparateur = (ap1, ap2) -> ap1.getNom().compareTo(ap2.getNom());
+            List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateur);
+            assertNotNull(appareilsTries);
+            assertEquals(2, appareilsTries.size());
+            assertEquals(batterie2, appareilsTries.get(0));
+            assertEquals(batterie1, appareilsTries.get(1));
+        }
+
+    }
