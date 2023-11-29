@@ -13,20 +13,15 @@ public class RegistreImpl implements Registre {
     }
 
     @Override
-    public Appareil getAppareil(String nom) {
-        return appareils.get(nom);
+    public Appareil getAppareil(String nomAppareil) {
+        return appareils.get(nomAppareil);
     }
 
     @Override
     public Set<String> getMessagesDesCapteursDUnAppareil(String nomAppareil) throws Exception {
-
-        Set<String> messages=new HashSet();
-        for (Appareil app : this.appareils.values()) {
-            if (app.getNom().equals(nomAppareil)) {
-                return app.getMessagesDesCapteurs();
-            }
-        }
-        throw new Exception("Appareil inexistant");
+        Appareil appareil = this.appareils.get(nomAppareil);
+        if (appareil==null)  throw new Exception("Appareil inexistant");
+        return appareil.getMessagesDesCapteurs();
     }
 
     @Override

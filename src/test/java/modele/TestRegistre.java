@@ -28,7 +28,7 @@ public class TestRegistre {
     private static final Registre registre = new RegistreImpl();
 
 
-    // Test ajout à nouveau batterie1
+    // Test ajout batterie1
     @Test
     @Order(1)
     public void testAjoutBatterie1() {
@@ -107,7 +107,7 @@ public class TestRegistre {
     }
         @Test
         @Order(8)
-        public void testGetListeTrieeAppareils () {
+        public void testGetListeTrieeAppareilsSurLesNoms () {
             Comparator<Appareil> comparateur = (ap1, ap2) -> ap1.getNom().compareTo(ap2.getNom());
             List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateur);
             assertNotNull(appareilsTries);

@@ -10,7 +10,7 @@ public interface Registre {
 
     // permet d'obtenir la référence de l'appareil dont on précise le nom
     // renvoie null, si l'appareil n'est pas présent dans le registre
-    Appareil getAppareil(String nom);
+    Appareil getAppareil(String nomAppareil);
 
     // permet d'obtenir les messages des capteurs d'un appareil dont on précise le nom en paramètre
     // lance une exception si cet appareil n'est pas présent de le registre
