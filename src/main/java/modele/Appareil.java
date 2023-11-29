@@ -2,7 +2,8 @@ package modele;
 
 import java.util.Set;
 
-// la comparaison des appareils doit se faire sur les noms des appareils
+// 2 apareils doivent pouvoir être comparés
+// la comparaison doit se faire sur les noms des appareils
 public interface Appareil extends Comparable<Appareil>{
 
     // permet d'obtenir le nom de l'appareil
@@ -24,7 +25,7 @@ public interface Appareil extends Comparable<Appareil>{
     // lance une exception si l'appareil n'est pas équipé de ce capteur
     Capteur getCapteur(String nomCapteur) throws Exception;
 
-    // permet d'obtenir les messages des capteurs dont cet appreil est équippé
+    // permet d'obtenir les messages des capteurs dont cet appareil est équipé
     // si pas de message, une liste vide est renvoyée
     Set<String> getMessagesDesCapteurs();
 

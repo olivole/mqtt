@@ -71,7 +71,7 @@ public class TestAppareil {
     }
     @Test
     @Order(9)
-    public void testMemoriserMessageCapteurInexistant() {
+    public void testGetCapteurInexistant() {
         try {
             batterie1.getCapteur( "capteur inexistant");
             fail("Il aurait du lancer une exception car le capteur est inexistant");
