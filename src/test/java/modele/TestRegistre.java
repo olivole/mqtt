@@ -108,12 +108,21 @@ public class TestRegistre {
         @Test
         @Order(8)
         public void testGetListeTrieeAppareilsSurLesNoms () {
-            Comparator<Appareil> comparateur = (ap1, ap2) -> ap1.getNom().compareTo(ap2.getNom());
-            List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateur);
+            Comparator<Appareil> comparateurNoms = (ap1, ap2) -> ap1.getNom().compareTo(ap2.getNom());
+            List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateurNoms);
             assertNotNull(appareilsTries);
             assertEquals(2, appareilsTries.size());
             assertEquals(batterie2, appareilsTries.get(0));
             assertEquals(batterie1, appareilsTries.get(1));
         }
-
+    @Test
+    @Order(9)
+    public void testGetListeTrieeAppareilsSurLeNombreDeCapteurs () {
+        Comparator<Appareil> comparateurCapteurs = (ap1, ap2) -> ap1.getNombreDeCapteurs()-ap2.getNombreDeCapteurs();
+        List<Appareil> appareilsTries = registre.getListeTrieeAppareils(comparateurCapteurs);
+        assertNotNull(appareilsTries);
+        assertEquals(2, appareilsTries.size());
+        assertEquals(batterie2, appareilsTries.get(0));
+        assertEquals(batterie1, appareilsTries.get(1));
     }
+}
